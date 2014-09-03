@@ -13,7 +13,8 @@ BaseApp::Application.routes.draw do
   resources :spells
   resources :activities do
     collection do
-      post 'explore', :action => :explore
+      post 'explore', action: :explore
+      post 'collect', action: :collect
     end
   end
   get "/admin" => "admin/base#index", :as => "admin"

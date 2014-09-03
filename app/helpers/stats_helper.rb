@@ -1,9 +1,5 @@
 module StatsHelper
 
-  def total_mana
-    300
-  end
-
   def get_orb_count
     #update war_orbs here
     current_user.orb_count
@@ -50,23 +46,23 @@ module StatsHelper
     mana_collect = user.mana_collect_again_at
 
     while gold_collect < Time.now
-      if user.uncollected_gold+gph < max_gold
+      if user.uncollected_gold+gph < max_carry_gold
         gold_collect = gold_collect+15.minutes
         user.update_attributes( uncollected_gold: user.uncollected_gold+gph, gold_collect_again_at:gold_collect)
         user.user_notifications.create(notification_id:3, num1: gph )
       else
-        user.update_attributes( uncollected_gold: max_gold)
+        user.update_attributes( uncollected_gold: max_carry_gold)
         break
       end
     end
 
     while mana_collect < Time.now
-      if user.uncollected_mana+mph < max_mana
+      if user.uncollected_mana+mph < max_carry_mana
         mana_collect = mana_collect+15.minutes
         user.update_attributes( uncollected_mana: user.uncollected_mana+mph, mana_collect_again_at:mana_collect)
         user.user_notifications.create(notification_id:4, num1: mph )
       else
-        user.update_attributes( uncollected_mana: max_mana)
+        user.update_attributes( uncollected_mana: max_carry_mana)
         break
       end
     end
@@ -99,11 +95,11 @@ module StatsHelper
 
 
   #stubbed until structures are added
-  def max_gold
+  def max_carry_gold
     5000
   end
 
-  def max_mana
+  def max_carry_mana
     1500
   end
   def get_structure_gold_per_hour
@@ -112,6 +108,10 @@ module StatsHelper
 
   def get_structure_mana_per_hour
     150
+  end
+
+  def mana_capacity
+    300
   end
 
 end

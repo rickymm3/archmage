@@ -1,6 +1,6 @@
 class UserNotification < ActiveRecord::Base
   belongs_to :notification
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   def self.render_message(un, user)
     un.update_attributes(viewed: true)
     n = Notification.find(un.notification_id)

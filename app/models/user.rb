@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
 
   devise :omniauthable
   before_destroy :destroy_structure_assignments
-  has_many :user_structures
+  has_many :user_structures, dependent: :delete_all
   has_many :structures, :through => :user_structures
-  has_many :user_notifications
+  has_many :user_notifications, dependent: :delete_all
   has_many :notifications, :through => :user_notifications
   has_and_belongs_to_many :roles
 
