@@ -1,0 +1,10 @@
+-war_orbs = get_orb_count
+.absolute.centerpos
+  .relative.centerneg
+    .war-orbs
+      -3.times do
+        -if war_orbs == 0
+          = "X"
+        -else
+          = "O"
+          - war_orbs = war_orbs- 1

@@ -1,0 +1,6 @@
+.status.container
+  .row
+    .stats.col-xs-6.col-md-6.col-lg-6
+      ="Welcome #{current_user.email} --- Land: #{get_used_land}/#{current_user.land}"
+    .col-xs-6.col-md-6.col-lg-6.text-right
+      =render 'shared/explore'

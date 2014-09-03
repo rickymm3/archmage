@@ -1,0 +1,15 @@
+.container
+  .home-pic.col-xs-12.col-md-12.col-lg-12
+    -structures.each do |s|
+      .panel.panel-primary
+        .panel-heading
+          =link_to "<i class='fa fa-info-circle white'></i>".html_safe, "#", class:"structure-info",title: "#{s.name}", tabindex: 0,
+            data: { toggle: "popover", trigger:"focus", content: s.description }
+          =s.name
+        .panel-body
+          ="Number Owned: #{current_user.user_structures.where(structure_id:s.id).first.num}"
+
+:javascript
+  $(document).ready(function(){
+    $(".structure-info").popover({placement : 'right'});
+  });

@@ -1,0 +1,8 @@
+.status.container
+  .left.col-xs-4.col-md-4.col-lg-4
+    .gold.row
+      ="Gold = #{current_user.gold}"
+    .mana.row
+      ="Mana = #{current_user.mana}/#{total_mana}"
+  .right.col-xs-8.col-md-8.col-lg-8
+    =render "shared/resource_collect"

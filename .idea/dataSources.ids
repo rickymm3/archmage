@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Rails archmage: development" uuid="203983fb-7bf1-451b-acf4-fb2a303aa012">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails archmage: test" uuid="c3e34b03-09b4-4f3e-a3e3-1ca3193ef731">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails archmage: cucumber" uuid="ab218c52-a2c1-4110-ac57-3dfb8530e5ec">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails archmage: production" uuid="124ade4e-cdb2-495c-be66-251c3df9a6be">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>

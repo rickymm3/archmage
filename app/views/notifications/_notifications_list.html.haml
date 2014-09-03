@@ -1,0 +1,8 @@
+.container
+  .col-xs-12.col-md-12.col-lg-12
+    -@usernotifications.each do |un|
+      .row
+        .col-xs-2.col-md-2.col-lg-2
+          =un.updated_at.to_time
+        .col-xs-10.col-md-10.col-lg-10
+          =UserNotification.render_message(un, current_user)

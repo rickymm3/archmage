@@ -1,0 +1,22 @@
+-#get user_uncollected_gold /mana and times
+-#do math to figure it all out
+-gold_perc = ((current_user.uncollected_gold.to_f/max_gold) * 100).ceil
+-mana_perc = ((current_user.uncollected_mana.to_f/max_mana) * 100).ceil
+.col-xs-2.col-md-2.col-lg-2
+  %h5.progress-label="Gold (#{distance_of_time_in_words(gold_time_left)})"
+  %h5.progress-label="Mana(#{distance_of_time_in_words(mana_time_left)})"
+.col-xs-10.col-md-8.col-lg-6
+  .progress.col-xs-10.col-md-10.col-lg-10
+    .progress-bar.progress-bar-warning{"aria-valuemax" => "#{max_gold}",
+    "aria-valuemin" => "20", "aria-valuenow" => "#{current_user.uncollected_gold}", :role => "progressbar",
+    style: "width: #{gold_perc}%;"} #{current_user.uncollected_gold}
+  .collect.col-xs-2.col-md-2.col-lg-2
+    = form_tag("activities/collect", method: "post") do
+      = submit_tag("Collect")
+  .progress.col-xs-10.col-md-10.col-lg-10
+    .progress-bar.progress-bar-info{"aria-valuemax" => "#{max_mana}",
+    "aria-valuemin" => "20", "aria-valuenow" => "#{current_user.uncollected_mana}", :role => "progressbar",
+    style: "width: #{mana_perc}%;"} #{current_user.uncollected_mana}
+  .collect.col-xs-2.col-md-2.col-lg-2
+    = form_tag("activities/collect", method: "post") do
+      = submit_tag("Collect")
