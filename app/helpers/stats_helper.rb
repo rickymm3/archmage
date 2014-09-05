@@ -66,31 +66,6 @@ module StatsHelper
         break
       end
     end
-
-
-    # if times_gold_update > 0
-    #   times_gold_update.times do
-    #     if user.uncollected_gold+gph < max_gold
-    #       new_gold = (user.uncollected_gold + gph)
-    #       user.update_attributes( uncollected_gold: new_gold, gold_collect_again_at:timenow+15.minutes)
-    #       # user collected num1 gold in taxes
-    #       user.user_notifications.create(notification_id:3, num1: gph )
-    #     else
-    #     end
-    #   end
-    # end
-    # if times_mana_update > 0
-    #   times_mana_update.times do
-    #     if user.uncollected_mana+mph < max_mana
-    #       new_mana = (user.uncollected_mana + mph)
-    #       user.update_attributes( uncollected_mana: new_mana, mana_collect_again_at:timenow+15.minutes)
-    #       # user collected num1 gold in taxes
-    #       user.user_notifications.create(notification_id:4, num1: mph )
-    #     else
-    #       user.update_attributes( uncollected_mana: max_mana, mana_collect_again_at:timenow+15.minutes)
-    #     end
-    #   end
-    # end
   end
 
 
@@ -111,7 +86,7 @@ module StatsHelper
   end
 
   def mana_capacity
-    300
+    3000
   end
 
 end
