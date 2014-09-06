@@ -1,6 +1,4 @@
 .right
-  -timeleft = current_user.explore_end - Time.now
-  -complete_explore if timeleft < 0 && current_user.is_exploring?
   -if current_user.is_exploring?
     = "Exploration: #{distance_of_time_in_words(current_user.explore_end, Time.now, include_seconds:true)} left"
   -else

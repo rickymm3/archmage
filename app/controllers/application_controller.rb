@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   include StatsHelper
-  before_filter :authenticate_user!
+  before_filter :every_page
   helper_method :roundup
 
   def render404
@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   def every_page
     update_collectors if current_user
+    complete_explore if current_user.explore_end - Time.now < 0 && current_user.is_exploring?
   end
 
   def roundup(num)
@@ -19,14 +20,6 @@ class ApplicationController < ActionController::Base
       (num/(10.0**x)).ceil * 10**x
     else
       0
-    end
-  end
-
-  protected
-  def authenticate_user!
-    if user_signed_in?
-      super
-      every_page
     end
   end
 

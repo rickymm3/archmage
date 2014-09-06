@@ -7,7 +7,6 @@ module Users
       if @user.persisted?
         create_new_user(@user)
       end
-
     end
 
     # def configure_permitted_parameters

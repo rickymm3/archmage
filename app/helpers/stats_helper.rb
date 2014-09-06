@@ -15,9 +15,8 @@ module StatsHelper
 
   def complete_explore
     land = 1
-    un = current_user.user_notifications.create(notification_id:1, num1: land, viewed:false)
-    if un.save
-      current_user.update_attributes(is_exploring:false)
+    if current_user.update_attributes(is_exploring:false, land:current_user.land+land)
+      current_user.user_notifications.create(notification_id:1, num1: land, viewed:false)
     end
   end
 
@@ -32,7 +31,6 @@ module StatsHelper
   def update_collectors(user = current_user)
     gph = get_structure_gold_per_hour
     mph = get_structure_mana_per_hour
-    timenow = Time.now
 
     gold_collect = user.gold_collect_again_at
     mana_collect = user.mana_collect_again_at
