@@ -10,8 +10,10 @@ class ApplicationController < ActionController::Base
   end
 
   def every_page
-    update_collectors if current_user
-    complete_explore if current_user.explore_end - Time.now < 0 && current_user.is_exploring?
+    if current_user
+      update_collectors 
+      complete_explore if current_user.explore_end - Time.now < 0 && current_user.is_exploring?
+    end
   end
 
   def roundup(num)
