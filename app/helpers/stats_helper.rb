@@ -5,14 +5,6 @@ module StatsHelper
     current_user.orb_count
   end
 
-  def run_full_update
-    @collection = get_collection_data
-  end
-
-  def get_collection_data
-    Hash.new(collect_gold: current_user.collect_gold, collect_mana: current_user.collect_mana)
-  end
-
   def get_used_land
     total = 0
     current_user.user_structures.each do |s|
@@ -68,6 +60,15 @@ module StatsHelper
     end
   end
 
+  def get_gold_cost(s)
+    us = current_user.user_structures.where(structure_id:s.id).first
+    roundup(s.gold_cost*us.num*((s.gold_multiple)**us.num))
+  end
+
+  def get_mana_cost(s)
+    us = current_user.user_structures.where(structure_id:s.id).first
+    roundup(s.mana_cost*us.num*((s.mana_multiple)**us.num))
+  end
 
   #stubbed until structures are added
   def max_carry_gold
@@ -77,6 +78,7 @@ module StatsHelper
   def max_carry_mana
     1500
   end
+
   def get_structure_gold_per_hour
     300
   end
@@ -86,7 +88,7 @@ module StatsHelper
   end
 
   def mana_capacity
-    3000
+    5000
   end
 
 end

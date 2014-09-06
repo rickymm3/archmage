@@ -15,6 +15,8 @@ BaseApp::Application.routes.draw do
     collection do
       post 'explore', action: :explore
       post 'collect', action: :collect
+      post 'build', action: :build
+      post 'destroy', action: :destroy
     end
   end
   get "/admin" => "admin/base#index", :as => "admin"

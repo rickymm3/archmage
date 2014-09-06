@@ -5,4 +5,5 @@ class StructuresController < ApplicationController
     @page = 'structure'
     @structures = Structure.all
   end
+
 end

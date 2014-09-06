@@ -1,14 +1,32 @@
 .container
-  .home-pic.col-xs-12.col-md-12.col-lg-12
-    -structures.each do |s|
-      .panel.panel-primary
-        .panel-heading
-          =link_to "<i class='fa fa-info-circle white'></i>".html_safe, "#", class:"structure-info",title: "#{s.name}", tabindex: 0,
-            data: { toggle: "popover", trigger:"focus", content: s.description }
-          =s.name
-        .panel-body
-          ="Number Owned: #{current_user.user_structures.where(structure_id:s.id).first.num}"
-
+  .home-pic.panel-default
+    %ul.list-inline
+      -structures.each do |s|
+        %li
+          .panel.panel-primary
+            .panel-heading
+              =link_to "<i class='fa fa-info-circle white'></i>".html_safe, "#", class:"structure-info",title: "#{s.name}", tabindex: 0,
+                data: { toggle: "popover", trigger:"focus", content: s.description }
+              =s.name
+            %table.table
+              %tbody
+                %tr
+                  %td
+                    ="Number Owned: #{current_user.user_structures.where(structure_id:s.id).first.num}"
+                %tr
+                  %td
+                    ="Gold Cost:#{get_gold_cost(s)}"
+                %tr
+                  %td
+                    ="Mana Cost:#{get_mana_cost(s)}"
+                %tr
+                  %td
+                    = form_tag("activities/build", method: "post") do
+                      = hidden_field_tag "structure_id", s.id
+                      = submit_tag("Build", class:"btn btn-default btn-sm left")
+                    = form_tag("activities/destroy", method: "post",onsubmit: "return confirm('Are you sure you want to destroy?');") do
+                      = hidden_field_tag "structure_id", s.id
+                      = submit_tag("Destroy", class:"btn btn-alert btn-sm")
 :javascript
   $(document).ready(function(){
     $(".structure-info").popover({placement : 'right'});

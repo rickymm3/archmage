@@ -62,3 +62,4 @@ gem 'seed_dump'
 gem 'cancancan'
 
 gem 'rails-timeago'
+gem 'seed_dump'

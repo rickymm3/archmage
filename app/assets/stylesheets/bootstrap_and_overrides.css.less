@@ -30,12 +30,28 @@
 
 @media (min-width: @screen-lg) {
   .container {
-    max-width: 650px;
+    max-width: 700px;
   }
 }
 
-@media (min-width: @screen-md) {
+@media (max-width: @screen-md-max) {
   .container {
-    max-width: 650px;
+    max-width: 700px;
   }
+}
+
+@media (max-width: @screen-sm-max) {
+  .container {
+    max-width: 700px;
+  }
+}
+
+.list-inline {
+  li {
+    padding-left: 0px!important;
+  }
+}
+
+nav {
+  margin-top: 10px;
 }
