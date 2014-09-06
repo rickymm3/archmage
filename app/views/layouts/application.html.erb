@@ -26,7 +26,7 @@
       <%= render "layouts/application/header" %>
 
       <%= render "layouts/application/flash_messages" %>
-      <%= render "shared/notifications"%>
+      <%= render "shared/notifications" if current_user%>
 
       <%= yield %>
 
