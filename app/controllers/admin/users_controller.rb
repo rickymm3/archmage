@@ -3,6 +3,7 @@ class Admin::UsersController < Admin::BaseController
   include StatsHelper
   helper_method :sort_column, :sort_direction, :search_params
   before_filter :find_user, :only => [:edit, :update, :show, :destroy]
+  devise :omniauthable, :omniauth_providers => [:facebook]
 
   def index
     @q = User.search(params[:q])
