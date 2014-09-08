@@ -1,7 +1,7 @@
--pic_info = get_home_page(page)
+-get_home_page(page)
 .panel.panel-default
   .panel-body.no-margin.no-padding
-    .home-pic.col-xs-12.col-md-12.col-lg-12{style:"background-image: url('/assets/#{@filename}');#{@percentage};#{@opt1}"}
+    .home-pic.col-xs-12.col-md-12.col-lg-12{style:"background-image: asset-data-url('/assets/#{@filename}');#{@percentage};#{@opt1}"}
       .absolute.pagename
         =@page.capitalize
       .absolute.view-notifications
