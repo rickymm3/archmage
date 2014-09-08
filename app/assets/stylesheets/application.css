@@ -63,3 +63,11 @@
 .blue {
     color: #428bca;
 }
+
+.no-padding{
+    padding:0px!important;
+}
+
+.no-margin {
+    margin:0px!important;
+}
