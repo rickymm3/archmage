@@ -9,29 +9,26 @@ module ApplicationHelper
 
   def get_home_page(page)
     @one = "background-repeat: no-repeat"
-    @percentage = "background-position: 0% 0%"
-    @opt1 = ""
+    @percentage = "background-position: 90% 10%"
+    @opt1 = "background-repeat: no-repeat;"
     case page
     when 'home'
       @filename = 'homescreen.jpg'
-      @percentage = "background-position: 90% 10%"
-      @opt1 = "width: 100%; background-repeat: no-repeat; background-attachment: fixed;"
-      when 'army'
-      'army.png'
+    when 'army'
+      @filename = 'army.jpg'
+      @percentage = "background-position: 50% 40%"
     when 'war'
-      'war.png'
+      @filename = 'homescreen.jpg'
     when 'structures'
       @filename = 'structures.jpg'
-      @percentage = "background-position: 20% 10%"
-      @opt1 = "background-size: 100%; background-repeat: no-repeat; background-attachment: fixed;"
-      when 'market'
-      'market.png'
+    when 'market'
+      @filename = 'homescreen.jpg'
     when 'spells'
-      'spells.png'
+      @filename = 'homescreen.jpg'
     when 'items'
-      'items.png'
+      @filename = 'homescreen.jpg'
     when 'notification'
-      'notifications.png'
+      @filename = 'homescreen.jpg'
     end
   end
 
