@@ -1,6 +1,8 @@
--filename = get_home_page(page)
-.container
-  .home-pic.col-xs-12.col-md-12.col-lg-12
-    .row="#{filename}"
-    .absolute.view-notifications
-      =link_to "N", notifications_index_path, class:"btn btn-default"
+-pic_info = get_home_page(page)
+.panel.panel-default
+  .panel-body.no-margin.no-padding
+    .home-pic.col-xs-12.col-md-12.col-lg-12{style:"background-image: url('/assets/#{@filename}');#{@percentage};#{@opt1}"}
+      .absolute.pagename
+        =@page.capitalize
+      .absolute.view-notifications
+        =link_to "N", notifications_index_path, class:"btn btn-default"

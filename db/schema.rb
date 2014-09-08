@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905172211) do
+ActiveRecord::Schema.define(version: 20140908155156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "armies", force: true do |t|
+    t.string   "name"
+    t.integer  "barracks_lvl"
+    t.boolean  "is_summon",    default: false
+    t.string   "description"
+    t.integer  "gold_upkeep"
+    t.integer  "mana_upkeep"
+    t.integer  "lvl"
+    t.integer  "str"
+    t.integer  "spd"
+    t.integer  "int"
+    t.integer  "population"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "notifications", force: true do |t|
     t.string   "message"
@@ -42,6 +58,14 @@ ActiveRecord::Schema.define(version: 20140905172211) do
     t.integer  "gold_cost"
     t.decimal  "mana_multiple", precision: 3, scale: 2
     t.decimal  "gold_multiple", precision: 3, scale: 2
+  end
+
+  create_table "user_armies", force: true do |t|
+    t.integer  "army_id"
+    t.integer  "user_id"
+    t.integer  "number_owned"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_notifications", force: true do |t|

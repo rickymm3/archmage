@@ -6,7 +6,11 @@ BaseApp::Application.routes.draw do
 
   get "home/index"
   resources :war
-  resources :army
+  resources :army do
+    collection do
+      resources :recruit
+    end
+  end
   resources :market
   resources :structures
   resources :items
@@ -17,6 +21,7 @@ BaseApp::Application.routes.draw do
       post 'collect', action: :collect
       post 'build', action: :build
       post 'destroy', action: :destroy
+      post 'disband', action: :disband
     end
   end
   get "/admin" => "admin/base#index", :as => "admin"

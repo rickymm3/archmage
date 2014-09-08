@@ -17,9 +17,14 @@ module CreateUserHelper
   def add_user_stats(user)
     user.gold = 300
     user.mana = 300
+    user.uncollected_gold = 0
+    user.uncollected_gold = 0
     user.orb_count = 3
+    user.orb_updated_at = Time.now
     user.land = 5
     user.explore_end = Time.now-1.minute
+    user.is_exploring = false
+    user.explore_start = Time.now-2.minute
     user.touch(:last_collect_gold_at)
     user.touch(:last_collect_mana_at)
     user.gold_collect_again_at = Time.now+15.minutes

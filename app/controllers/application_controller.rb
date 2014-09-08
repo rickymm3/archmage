@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
 
   def every_page
     if current_user
-      update_collectors 
+      get_page_variables
+      update_collectors
       complete_explore if current_user.explore_end - Time.now < 0 && current_user.is_exploring?
     end
   end

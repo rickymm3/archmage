@@ -2,7 +2,6 @@ class ActivitiesController < ApplicationController
 
   #activities updates different attributes (like user.attributes) using PUT
   include StatsHelper
-  before_filter :set_game_variables, :only => [:explore, :collect]
 
   def explore
     #have to run check
@@ -47,9 +46,9 @@ class ActivitiesController < ApplicationController
     end
 
     if params[:resource] === 'mana'
-      if uncollected_mana+current_user.mana > mana_capacity
+      if uncollected_mana+current_user.mana > @mana_capacity
         #add a confirm dialog because you can sap your mana while overfilling mana
-        mana = mana_capacity
+        mana = @mana_capacity
       else
         mana = current_user.mana + uncollected_mana
       end
@@ -113,11 +112,8 @@ class ActivitiesController < ApplicationController
     redirect_to structures_path
   end
 
-  private
-
-  def set_game_variables
-    @explore_time = 10.minutes
-    @collect_time = 15.minutes
+  def disband
+    redirect_to army_path
   end
 
 end

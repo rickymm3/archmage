@@ -1,8 +1,8 @@
-.container
+.container.buildings
   .home-pic.panel-default
     %ul.list-inline
       -structures.each do |s|
-        %li
+        %li.col-xs-12.col-md-4.col-lg-3
           .panel.panel-primary
             .panel-heading
               =link_to "<i class='fa fa-info-circle white'></i>".html_safe, "#", class:"structure-info",title: "#{s.name}", tabindex: 0,

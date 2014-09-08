@@ -1,5 +1,5 @@
--gold_perc = ((current_user.uncollected_gold.to_f/max_carry_gold) * 100).ceil
--mana_perc = ((current_user.uncollected_mana.to_f/max_carry_mana) * 100).ceil
+-gold_perc = ((current_user.uncollected_gold.to_f/@max_carry_gold) * 100).ceil
+-mana_perc = ((current_user.uncollected_mana.to_f/@max_carry_mana) * 100).ceil
 -time_till_gold = 'Full'
 -time_till_mana = 'Full'
 -time_till_gold = distance_of_time_in_words(gold_time_left) if current_user.gold_collect_again_at > Time.now
@@ -12,10 +12,10 @@
       %tr
         %td.text-right Gold:
         %td.text-left="#{current_user.gold}"
-        %td.text-right="(#{time_till_gold})"
+        %td.text-right="+#{@gold_per_refresh} (#{time_till_gold})"
         %td{style:"width:50%"}
           .progress{style:"margin-bottom:0"}
-            .progress-bar.progress-bar-warning{"aria-valuemax" => "#{max_carry_gold}",
+            .progress-bar.progress-bar-warning{"aria-valuemax" => "#{@max_carry_gold}",
             "aria-valuemin" => "20", "aria-valuenow" => "#{current_user.uncollected_gold}", :role => "progressbar",
             style: "width: #{gold_perc}%;"} #{current_user.uncollected_gold}
         %td
@@ -24,11 +24,11 @@
             = submit_tag("Collect", class:'btn btn-default btn-xs')
       %tr
         %td.text-right Mana:
-        %td.text-left="#{current_user.mana}/#{mana_capacity}"
-        %td.text-right="(#{time_till_mana})"
+        %td.text-left="#{current_user.mana}/#{@mana_capacity}"
+        %td.text-right="+#{@mana_per_refresh} (#{time_till_mana})"
         %td
           .progress{style:"margin-bottom:0"}
-            .progress-bar.progress-bar-info{"aria-valuemax" => "#{max_carry_mana}",
+            .progress-bar.progress-bar-info{"aria-valuemax" => "#{@max_carry_mana}",
             "aria-valuemin" => "20", "aria-valuenow" => "#{current_user.uncollected_mana}", :role => "progressbar",
             style: "width: #{mana_perc}%;"} #{current_user.uncollected_mana}
         %td

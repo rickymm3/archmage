@@ -2,7 +2,7 @@ class StructuresController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @page = 'structure'
+    @page = 'structures'
     @structures = Structure.all
   end
 

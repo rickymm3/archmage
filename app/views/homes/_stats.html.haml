@@ -1,4 +1,6 @@
 .panel.panel-default
   .panel.panel-body{style:"margin-bottom:0"}
-    .left="Welcome #{current_user.email} --- Land: #{get_used_land}/#{current_user.land}"
+    .left
+      ="Welcome #{current_user.email} --- Land: #{get_used_land}/#{current_user.land}"
+      ="Population: #{@current_population}/#{@max_population}"
     =render 'shared/explore'

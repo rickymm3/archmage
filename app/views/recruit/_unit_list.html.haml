@@ -1,0 +1,49 @@
+.panel.panel-default
+  .panel-heading Unit List
+  %table.table
+    %thead
+      %th Owned
+      %th Name
+      %th
+        Gold Upkeep
+        =link_to "<i class='fa fa-info-circle blue'></i>".html_safe, "#", class:"unit-info",title: "Gold Upkeep", tabindex: 0,
+          data: { toggle: "popover", trigger:"focus", content:"How much gold it takes to upkeep (subtracts from your gph) per unit"}
+      %th
+        Mana Upkeep
+        =link_to "<i class='fa fa-info-circle blue'></i>".html_safe, "#", class:"unit-info",title: "Mana Upkeep", tabindex: 0,
+          data: { toggle: "popover", trigger:"focus", content:"How much mana it takes to upkeep (subtracts from your mph) per unit"}
+      %th
+        Strength
+        =link_to "<i class='fa fa-info-circle blue'></i>".html_safe, "#", class:"unit-info",title: "Str", tabindex: 0,
+          data: { toggle: "popover", trigger:"focus", content:"How much damage the unit does in an attack."}
+      %th
+        Speed
+        =link_to "<i class='fa fa-info-circle blue'></i>".html_safe, "#", class:"unit-info",title: "Spd", tabindex: 0,
+          data: { toggle: "popover", trigger:"focus", content:"Decides which unit-group attacks first during wars."}
+      %th
+        Int
+        =link_to "<i class='fa fa-info-circle blue'></i>".html_safe, "#", class:"unit-info",title: "Int", tabindex: 0,
+          data: { toggle: "popover", trigger:"focus", content:"The higher a units int, the more damage for something?"}
+      %th
+        Pop
+        =link_to "<i class='fa fa-info-circle blue'></i>".html_safe, "#", class:"unit-info",title: "Population", tabindex: 0,
+          data: { toggle: "popover", trigger:"focus", content:"How much population per unit"}
+    %tbody
+      -@units_list.each do |unit|
+        %tr
+          %td
+            .input-group
+            ="#{current_user.user_armies.where(army_id:unit.id).first.number_owned}"
+          %td="#{unit.name}"
+          %td="#{unit.gold_upkeep}"
+          %td="#{unit.mana_upkeep}"
+          %td="#{unit.str}"
+          %td="#{unit.spd}"
+          %td="#{unit.int}"
+          %td="#{unit.population}"
+
+
+:javascript
+  $(document).ready(function(){
+    $(".unit-info").popover({placement : 'right'});
+  });
