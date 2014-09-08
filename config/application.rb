@@ -29,8 +29,9 @@ module BaseApp
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    config.serve_static_assets = true
 
     # Heroku required setting
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = true
   end
 end
