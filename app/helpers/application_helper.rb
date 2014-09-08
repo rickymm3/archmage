@@ -14,16 +14,16 @@ module ApplicationHelper
     case page
     when 'home'
       @filename = 'homescreen.jpg'
-      # @percentage = "background-position: 90% 10%"
-      @opt1 = "background-size: 95%; background-repeat: no-repeat; background-attachment: fixed;"
+      @percentage = "background-position: 90% 10%"
+      @opt1 = "width: 100%; background-repeat: no-repeat; background-attachment: fixed;"
       when 'army'
       'army.png'
     when 'war'
       'war.png'
     when 'structures'
       @filename = 'structures.jpg'
-      # @percentage = "background-position: 90% 10%"
-      @opt1 = "background-size: 95%; background-repeat: no-repeat; background-attachment: fixed;"
+      @percentage = "background-position: 20% 10%"
+      @opt1 = "background-size: 100%; background-repeat: no-repeat; background-attachment: fixed;"
       when 'market'
       'market.png'
     when 'spells'

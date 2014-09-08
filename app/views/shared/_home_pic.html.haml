@@ -1,8 +1,7 @@
 -get_home_page(page)
 .panel.panel-default
   .panel-body.no-margin.no-padding
-    .home-pic.col-xs-12.col-md-12.col-lg-12
-      =image_tag "/assets/homescreen.jpg"
+    .home-pic.col-xs-12.col-md-12.col-lg-12{style:"background-image: url('#{asset_path @filename}');#{@percentage};#{@opt1}"}
       .absolute.pagename
         =@page.capitalize
       .absolute.view-notifications

@@ -1,0 +1,124 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+
+
+*/
+
+
+.top48 { margin-top: 48px; }
+
+.status {
+    border: 1px solid lightgray;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float:right;
+}
+
+.center-block{
+    float: none;
+}
+
+.war-orbs {
+    margin-top: 10px;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.centerpos {
+    right: 50%;
+}
+
+.centerneg {
+    right: -50%;
+}
+
+.menu-item {
+    border: 1px solid lightgray;
+}
+
+.white {
+    color: white;
+}
+
+.indent-left {
+    margin-left: 10px;
+}
+
+.indent-right {
+    margin-right: 10px;
+}
+
+.popover {
+    color: black;
+}
+
+.blue {
+    color: #428bca;
+}
+
+.no-padding{
+    padding:0px!important;
+}
+
+.no-margin {
+    margin:0px!important;
+}
+.home-pic {
+  height: 400px;
+  border-radius: 5px;
+}
+.home-pic .view-notifications {
+  top: 0;
+  right: 0;
+}
+.home-pic .pagename {
+  bottom: 0;
+  left: 0;
+  padding-left: 20px;
+  margin-bottom: -30px !important;
+  color: white;
+  font-size: 6em;
+}
+.progress-label {
+  float: left;
+  margin-right: 1em;
+}
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
