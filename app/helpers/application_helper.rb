@@ -9,8 +9,9 @@ module ApplicationHelper
 
   def get_home_page(page)
     @one = "background-repeat: no-repeat"
-    @percentage = "background-position: 90% 10%"
+    @percentage = "background-position-x: 120%; background-position-y: 0%;background-position: 90% 10% "
     @opt1 = "background-repeat: no-repeat;"
+
     case page
     when 'home'
       @filename = 'homescreen.jpg'
