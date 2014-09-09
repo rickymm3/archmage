@@ -33,7 +33,7 @@
         %tr
           %td
             .input-group
-            ="#{current_user.user_armies.where(army_id:unit.id).first.number_owned}"
+            ="#{current_user.user_armies.where(army_id:unit.id).first.number_owned}" if current_user.user_armies.exists?
           %td
             ="#{unit.name}"
             -max = (get_max_population(@num_town_centers, @num_barracks)-get_current_population) / unit.population
