@@ -22,6 +22,7 @@ BaseApp::Application.routes.draw do
       post 'build', action: :build
       post 'destroy', action: :destroy
       post 'disband', action: :disband
+      post 'recruit', action: :recruit
     end
   end
   get "/admin" => "admin/base#index", :as => "admin"

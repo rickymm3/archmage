@@ -34,7 +34,17 @@
           %td
             .input-group
             ="#{current_user.user_armies.where(army_id:unit.id).first.number_owned}"
-          %td="#{unit.name}"
+          %td
+            ="#{unit.name}"
+            -max = (get_max_population(@num_town_centers, @num_barracks)-get_current_population) / unit.population
+            .row
+              .col-lg-6
+                .input-group.input-group-sm
+                  = form_tag("/activities/recruit", method: "post") do
+                    = hidden_field_tag "unit_id", unit.id
+                    = text_field_tag "num_to_recruit", nil, type: "number", placeholder: '#', max: max.floor, min:0, class:'form-control'
+                    %span.input-group-btn
+                      = submit_tag("Recruit", type:"submit",class:"btn btn-default form-control")
           %td="#{unit.gold_upkeep}"
           %td="#{unit.mana_upkeep}"
           %td="#{unit.str}"

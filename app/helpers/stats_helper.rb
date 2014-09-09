@@ -87,19 +87,19 @@ module StatsHelper
 
   def get_page_variables
     #i made this to dramatically limit the amount of queries used to get these
-    num_town_centers = current_user.user_structures.where(structure_id:1).first.num
-    num_alters = current_user.user_structures.where(structure_id:2).first.num
-    num_barracks = current_user.user_structures.where(structure_id:3).first.num
-    num_banks = current_user.user_structures.where(structure_id:4).first.num
-    num_mana_core = current_user.user_structures.where(structure_id:5).first.num
+    @num_town_centers = current_user.user_structures.where(structure_id:1).first.num
+    @num_alters = current_user.user_structures.where(structure_id:2).first.num
+    @num_barracks = current_user.user_structures.where(structure_id:3).first.num
+    @num_banks = current_user.user_structures.where(structure_id:4).first.num
+    @num_mana_core = current_user.user_structures.where(structure_id:5).first.num
 
-    @max_carry_gold = max_carry_gold(num_banks, num_town_centers)
-    @max_carry_mana = max_carry_mana(num_mana_core, num_town_centers, num_alters)
-    @gold_per_refresh = get_structure_gold_per_hour(num_town_centers, num_banks)
-    @mana_per_refresh = get_structure_mana_per_hour(num_alters, num_town_centers, num_mana_core)
-    @mana_capacity = mana_capacity(num_alters, num_town_centers, num_mana_core)
+    @max_carry_gold = max_carry_gold(@num_banks, @num_town_centers)
+    @max_carry_mana = max_carry_mana(@num_mana_core, @num_town_centers, @num_alters)
+    @gold_per_refresh = get_structure_gold_per_hour(@num_town_centers, @num_banks)
+    @mana_per_refresh = get_structure_mana_per_hour(@num_alters, @num_town_centers, @num_mana_core)
+    @mana_capacity = mana_capacity(@num_alters, @num_town_centers, @num_mana_core)
 
-    @max_population = get_max_population(num_town_centers, num_barracks)
+    @max_population = get_max_population(@num_town_centers, @num_barracks)
     @current_population = get_current_population
 
     @explore_time = 10.minutes

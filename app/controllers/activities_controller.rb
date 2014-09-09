@@ -113,7 +113,35 @@ class ActivitiesController < ApplicationController
   end
 
   def disband
-    redirect_to army_path
+    if params[:num_to_disband].empty?
+      redirect_to army_index_path, notice: "Can't be 0"
+    end
+    num = current_user.user_armies.where(army_id:params[:unit_id]).first.number_owned
+    num_to_disband = params[:num_to_disband]
+    new = num - num_to_disband.to_i
+    if current_user.user_armies.where(army_id:params[:unit_id]).first.update_attributes(number_owned:new)
+      #need message
+      redirect_to army_index_path, notice: "you disbanded #{num_to_disband} units"
+    else
+      redirect_to army_index_path, notice: "there was an error, try again"
+    end
+  end
+
+  def recruit
+    #!***!need a check in here that doesn't allow you to pass the population cap!
+    if params[:num_to_recruit].empty?
+      redirect_to recruit_index_path, notice: "Can't be 0"
+    end
+    num = current_user.user_armies.where(army_id:params[:unit_id]).first.number_owned
+    num_to_recruit = params[:num_to_recruit]
+    new = num + num_to_recruit.to_i
+    if current_user.user_armies.where(army_id:params[:unit_id]).first.update_attributes(number_owned:new)
+      #need message
+      redirect_to recruit_index_path, notice: "you recruited #{num_to_recruit} units"
+    else
+      redirect_to recruit_index_path, notice: "there was an error, try again"
+    end
+
   end
 
 end
