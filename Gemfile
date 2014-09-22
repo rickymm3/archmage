@@ -46,6 +46,8 @@ end
 
 group :production, :development do
   gem "thin"
+  gem "pry"
+  gem 'pry-nav'
 end
 
 gem 'haml-rails'

@@ -29,13 +29,12 @@ class ActivitiesController < ApplicationController
 
   def collect
     timenow = Time.now
-    uncollected_gold = current_user.uncollected_gold
-    uncollected_mana = current_user.uncollected_mana
+    uncollected_gold = current_user.uncollected_gold if params[:resource] === 'gold'
+    uncollected_mana = current_user.uncollected_mana if params[:resource] === 'mana'
 
     if params[:resource] === 'gold'
       if current_user.update_attributes(
           last_collect_gold_at: timenow,
-          gold_collect_again_at: timenow+@collect_time,
           uncollected_gold:0,
           gold: current_user.gold + uncollected_gold)
         current_user.user_notifications.create(
@@ -54,7 +53,6 @@ class ActivitiesController < ApplicationController
       end
       if current_user.update_attributes(
           last_collect_mana_at: timenow,
-          mana_collect_again_at: timenow+@collect_time,
           uncollected_mana:0,
           mana: mana)
         current_user.user_notifications.create(
@@ -132,16 +130,42 @@ class ActivitiesController < ApplicationController
     if params[:num_to_recruit].empty?
       redirect_to recruit_index_path, notice: "Can't be 0"
     end
-    num = current_user.user_armies.where(army_id:params[:unit_id]).first.number_owned
+    num = 0
+    ua = current_user.user_armies.find_or_initialize_by(army_id:params['unit_id'])
+    num = ua.number_owned unless ua.number_owned.nil?
     num_to_recruit = params[:num_to_recruit]
     new = num + num_to_recruit.to_i
-    if current_user.user_armies.where(army_id:params[:unit_id]).first.update_attributes(number_owned:new)
+    if ua.update_attributes(number_owned:new)
       #need message
       redirect_to recruit_index_path, notice: "you recruited #{num_to_recruit} units"
     else
       redirect_to recruit_index_path, notice: "there was an error, try again"
     end
 
+  end
+
+  def payoff
+    #this will be instant
+    favor = calculate_favor(100)
+    current_user.update_attributes(favor:favor)
+    current_user.user_notifications.create(
+        notification_id:11,
+        num1: 10000, #gold - this is dependant on favor
+        num2: 100 #favor
+    )
+    redirect_to morale_index_path
+
+  end
+
+  def party
+    #this won't cost anything.  But it will take some number of time to finish
+    favor = calculate_favor(15)
+    current_user.update_attributes(favor:favor)
+    current_user.user_notifications.create(
+        notification_id:10,
+        num1: 15, #favor
+    )
+    redirect_to morale_index_path
   end
 
 end

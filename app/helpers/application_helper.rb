@@ -15,21 +15,38 @@ module ApplicationHelper
     case page
     when 'home'
       @filename = 'homescreen.jpg'
+      @percentage = "background-position: 90% 20%"
     when 'army'
       @filename = 'army.jpg'
-      @percentage = "background-position: 50% 40%"
+      @percentage = "background-position: 50% 80%"
     when 'war'
       @filename = 'homescreen.jpg'
+      @percentage = "background-position: 90% 20%"
+
     when 'structures'
       @filename = 'structures.jpg'
+      @percentage = "background-position: 90% 60%"
+
     when 'market'
       @filename = 'homescreen.jpg'
+      @percentage = "background-position: 90% 20%"
+
     when 'spells'
       @filename = 'homescreen.jpg'
+      @percentage = "background-position: 90% 20%"
+
     when 'items'
       @filename = 'homescreen.jpg'
+      @percentage = "background-position: 90% 20%"
+
     when 'notification'
       @filename = 'homescreen.jpg'
+      @percentage = "background-position: 90% 20%"
+
+    when 'morale'
+      @filename = 'homescreen.jpg'
+      @percentage = "background-position: 90% 20%"
+
     end
   end
 

@@ -28,6 +28,6 @@
                       = hidden_field_tag "structure_id", s.id
                       = submit_tag("Destroy", class:"btn btn-alert btn-sm")
 :javascript
-  $(document).ready(function(){
-    $(".structure-info").popover({placement : 'right'});
+  $(document).ready(function(e){
+    $(".structure-info").popover({placement : 'right' }).on('click', function(e) {e.preventDefault(); return true;});
   });

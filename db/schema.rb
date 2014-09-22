@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908155156) do
+ActiveRecord::Schema.define(version: 20140922231037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(version: 20140908155156) do
 
   create_table "user_notifications", force: true do |t|
     t.integer  "user_id"
-    t.integer  "notification_id"
     t.integer  "num1"
     t.integer  "num2"
     t.integer  "num3"
@@ -85,6 +84,7 @@ ActiveRecord::Schema.define(version: 20140908155156) do
     t.datetime "date1"
     t.datetime "date2"
     t.datetime "date3"
+    t.integer  "notification_id"
   end
 
   create_table "user_structures", force: true do |t|
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 20140908155156) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",                    null: false
+    t.string   "encrypted_password",     default: "",                    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -123,8 +123,8 @@ ActiveRecord::Schema.define(version: 20140908155156) do
     t.boolean  "is_exploring"
     t.integer  "uncollected_gold"
     t.integer  "uncollected_mana"
-    t.datetime "gold_collect_again_at"
-    t.datetime "mana_collect_again_at"
+    t.integer  "favor"
+    t.datetime "last_update_at",         default: '2014-09-22 14:19:11'
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

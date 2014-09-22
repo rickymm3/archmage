@@ -1,5 +1,7 @@
 BaseApp::Application.routes.draw do
 
+  resources :morale
+
   get 'notifications/index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",:registrations => "users/registrations"}
@@ -23,6 +25,8 @@ BaseApp::Application.routes.draw do
       post 'destroy', action: :destroy
       post 'disband', action: :disband
       post 'recruit', action: :recruit
+      post 'party', action: :party
+      post 'payoff', action: :payoff
     end
   end
   get "/admin" => "admin/base#index", :as => "admin"

@@ -1,18 +1,14 @@
 -gold_perc = ((current_user.uncollected_gold.to_f/@max_carry_gold) * 100).ceil
 -mana_perc = ((current_user.uncollected_mana.to_f/@max_carry_mana) * 100).ceil
--time_till_gold = 'Full'
--time_till_mana = 'Full'
--time_till_gold = distance_of_time_in_words(gold_time_left) if current_user.gold_collect_again_at > Time.now
--time_till_mana = distance_of_time_in_words(mana_time_left) if current_user.mana_collect_again_at > Time.now
 
 .panel.panel-default
-  .panel-heading Status
+  .panel-heading= "Status (#{time_till_next_update})(last update: #{current_user.last_update_at.to_time}/#{Time.now.to_time}"
   %table.table
     %tbody
       %tr
         %td.text-right Gold:
         %td.text-left="#{current_user.gold}"
-        %td.text-right="+#{@gold_per_refresh} (#{time_till_gold})"
+        %td.text-right=current_user.uncollected_gold == @max_carry_gold ? "(Full)" : "#{@gold_per_refresh}"
         %td{style:"width:50%"}
           .progress{style:"margin-bottom:0"}
             .progress-bar.progress-bar-warning{"aria-valuemax" => "#{@max_carry_gold}",
@@ -21,11 +17,11 @@
         %td
           = form_tag("activities/collect", method: "post") do
             = hidden_field_tag "resource", 'gold'
-            = submit_tag("Collect", class:'btn btn-default btn-xs')
+            = submit_tag("Collect Tribute", class:'btn btn-default btn-xs')
       %tr
         %td.text-right Mana:
         %td.text-left="#{current_user.mana}/#{@mana_capacity}"
-        %td.text-right="+#{@mana_per_refresh} (#{time_till_mana})"
+        %td.text-right=current_user.uncollected_mana == @max_carry_mana ? "(Full)" : "#{@mana_per_refresh}"
         %td
           .progress{style:"margin-bottom:0"}
             .progress-bar.progress-bar-info{"aria-valuemax" => "#{@max_carry_mana}",
@@ -34,4 +30,23 @@
         %td
           = form_tag("activities/collect", method: "post") do
             = hidden_field_tag "resource", 'mana'
-            = submit_tag("Collect", class:'btn btn-default btn-xs')
+            = submit_tag("Collect Prayer", class:'btn btn-default btn-xs')
+      %tr
+        %td{colspan:5}
+          ="Your troops demand retribution for their service.  They get angry when you collect tribute and prayer without giving back."
+      %tr
+        %td.text-right{style:"width:15%"}
+          %span=link_to "<i class='fa fa-info-circle'></i>".html_safe, "#", class:"favor-info",title: "Favor Help", tabindex: 0,
+                      data: { toggle: "popover", trigger:"focus", content: "The higher the favor, the more successful you will be when recruiting troops.  Troops will also be far less willing to abandon your cause" }
+          ="Favor"
+        %td{colspan:3,style:"width:50%"}
+          .progress{style:"margin-bottom:0"}
+            .progress-bar.progress-bar-warning{"aria-valuemax" => "100",
+            "aria-valuemin" => "0", "aria-valuenow" => "#{current_user.favor}", :role => "progressbar",
+            style: "width: #{current_user.favor}%;"} #{current_user.favor}
+        %td
+          =link_to("Raise Morale", '/morale', class:'btn btn-default btn-xs')
+:javascript
+  $(document).ready(function(e){
+    $(".favor-info").popover({placement : 'right' }).on('click', function(e) {e.preventDefault(); return true;});
+  });

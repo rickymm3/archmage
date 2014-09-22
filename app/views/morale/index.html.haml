@@ -1,0 +1,7 @@
+-if current_user
+  ="Welcome #{current_user.email}"
+  =render "shared/home_pic", page: @page
+  =render "homes/stats"
+  =render "shared/status"
+  =render "morale"
+  =render "shared/back"

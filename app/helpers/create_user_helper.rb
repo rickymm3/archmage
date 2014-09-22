@@ -15,10 +15,11 @@ module CreateUserHelper
   end
 
   def add_user_stats(user)
+    user.favor = 50
     user.gold = 300
     user.mana = 300
     user.uncollected_gold = 0
-    user.uncollected_gold = 0
+    user.uncollected_mana = 0
     user.orb_count = 3
     user.orb_updated_at = Time.now
     user.land = 5

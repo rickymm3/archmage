@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading Raise Morale
+  .panel-body
+    .well
+      = form_tag("/activities/party", method: "post") do
+        = submit_tag("Throw a Party", class:"btn btn-default btn-sm")
+    .well
+      = form_tag("/activities/payoff", method: "post") do
+        = submit_tag("Straight Up Pay Off", class:"btn btn-default btn-sm")
