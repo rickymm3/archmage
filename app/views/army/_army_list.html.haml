@@ -19,7 +19,7 @@
               .row
                 .col-lg-6
                   .input-group.input-group-sm
-                    = form_tag("activities/disband", method: "post") do
+                    = form_tag("/activities/disband", method: "post") do
                       = hidden_field_tag "unit_id", unit.id
                       = text_field_tag "num_to_disband", nil, type: "number", placeholder: '#', max: unit_army.number_owned, min:0, class:'form-control'
                       %span.input-group-btn
