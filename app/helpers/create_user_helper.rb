@@ -28,8 +28,6 @@ module CreateUserHelper
     user.explore_start = Time.now-2.minute
     user.touch(:last_collect_gold_at)
     user.touch(:last_collect_mana_at)
-    user.gold_collect_again_at = Time.now+15.minutes
-    user.mana_collect_again_at = Time.now+15.minutes
     user.save
   end
 end
