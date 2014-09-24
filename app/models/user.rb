@@ -11,9 +11,15 @@ class User < ActiveRecord::Base
   has_many :user_notifications, dependent: :delete_all
   has_many :notifications, :through => :user_notifications
 
+  has_one :element
+
   has_many :user_armies, dependent: :delete_all
   has_many :armies, :through => :user_armies
   has_and_belongs_to_many :roles
+
+  validates :username, presence: true
+  validates :username, uniqueness: true, if: -> { self.username.present? }
+  validates :element_id, presence: true
 
   def role?(role)
     return !!self.roles.find_by_name(role.to_s)

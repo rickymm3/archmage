@@ -1,0 +1,64 @@
+.page-header
+  %h2 Sign up
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form-horizontal", :role => "form" }) do |f|
+  = devise_error_messages!
+  .form-group
+    = f.label :email, :class => "col-sm-2 control-label"
+    .col-sm-4
+      = f.email_field :email, :type => :email, :class => "form-control", :placeholder => "Enter your email"
+  .form-group
+    = f.label :password, :class => "col-sm-2 control-label"
+    .col-sm-4
+      = f.password_field :password, :class => "form-control", :placeholder => "Password"
+  .form-group
+    = f.label :password_confirmation, :class => "col-sm-2 control-label"
+    .col-sm-4
+      = f.password_field :password_confirmation, :class => "form-control", :placeholder => "Confirm password"
+  .form-group
+    = f.label :username, :class => "col-sm-2 control-label"
+    .col-sm-4
+      = f.text_field :username, :class => "form-control", :placeholder => "Username"
+  .form-group
+    = f.label :element, :class => "col-sm-2 control-label"
+    .col-sm-4
+      = f.collection_select(:element_id, Element.all.reverse, :id, :name,
+      { :include_blank => false} ,class: "selectpicker form-control" )
+
+  .form-group
+    .col-sm-offset-2.col-sm-4
+      %button.btn.btn-default{:type => "submit"} Sign up
+.row.top48
+  .col-sm-offset-2.col-sm-4
+    = render "devise/shared/links"
+
+:javascript
+  $('.selectpicker').selectpicker();
+
+  $('body')
+  .on('keypress', 'button.selectpicker', function(e) {
+      var $options, $select, ctrl = this;
+      ctrl.buffer = (ctrl.buffer || "");
+      $select  = $(ctrl).parent('.bootstrap-select').prev('select.selectpicker');
+      $options = $(ctrl).parent('.bootstrap-select').prev('select.selectpicker').find('option');
+
+      // If capturing, keep capturing
+      if( ctrl.capture ) {
+          clearTimeout( ctrl.capture );
+      }
+
+      // capture keystrokes; reset capture after 1sec.
+      ctrl.capture = window.setTimeout( function() {
+          ctrl.buffer  = "";
+          ctrl.capture = null;
+      }, 1000);
+
+      // Use captured buffer to filter <options> of native select
+      // select first and trigger change & refresh
+      ctrl.buffer += String.fromCharCode(e.which);
+      var re = new RegExp("^" + ctrl.buffer + ".*", "i");
+      $options.filter( function() {
+          return $(this).text().match(re);
+      })
+      .first().prop('selected', true);
+      $select.change().selectpicker('refresh');
+  });
