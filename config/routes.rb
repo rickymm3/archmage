@@ -16,7 +16,11 @@ BaseApp::Application.routes.draw do
   resources :market
   resources :structures
   resources :items
-  resources :spells
+  resources :spells do
+    member do
+      get 'cast', action: :cast
+    end
+  end
   resources :activities do
     collection do
       post 'explore', action: :explore

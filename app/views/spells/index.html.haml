@@ -1,3 +1,7 @@
 -if current_user
+  .modal.fade#spell-modal
+  ="Welcome #{current_user.email}"
   =render "shared/home_pic", page: @page
+  =render "homes/stats"
+  =render "spell_list"
   =render "shared/back"

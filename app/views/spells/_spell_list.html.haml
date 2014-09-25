@@ -1,0 +1,15 @@
+.panel.panel-default
+  .panel-heading
+    Spells
+  .panel-body
+    -@spells.each do |key, spells|
+      .panel-heading
+        =key
+      -spells.each do |spell|
+        %dl.dl-horizontal
+          %dt
+            = link_to "Cast #{spell.name}", cast_spell_path(spell),
+              :remote => true, data: {toggle: "modal", target:"#spell-modal"}, class: "btn btn-default"
+          %dd
+            =spell.description
+          %br

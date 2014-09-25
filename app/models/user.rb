@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   has_many :user_notifications, dependent: :delete_all
   has_many :notifications, :through => :user_notifications
 
+  has_many :user_spells, dependent: :delete_all
+  has_many :spells, through: :user_spells
+
   has_one :element
 
   has_many :user_armies, dependent: :delete_all

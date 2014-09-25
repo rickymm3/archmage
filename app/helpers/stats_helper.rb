@@ -1,23 +1,14 @@
 module StatsHelper
 
-  def town_center_stats
+  # TODO organize all these stat methods into appropriate models
 
-  end
-
-  def alter_stats
-
-  end
-
-  def barracks_stats
-
-  end
-
-  def bank_stats
-
-  end
-
-  def mana_core_stats
-
+  def spell_form_builder(spell)
+    case spell.target
+      when 'self'
+        render 'spells/forms/self', spell:spell
+      when 'enemy'
+        render 'spells/forms/enemy', spell:spell
+    end
   end
 
   def get_orb_count
@@ -55,12 +46,12 @@ module StatsHelper
     favor
   end
 
-  def player_gold_is_maxed(total_gold)
-    current_user.uncollected_gold+@gold_per_refresh+total_gold >= @max_carry_gold
+  def player_gold_is_maxed(earned_gold)
+    current_user.uncollected_gold+@gold_per_refresh+earned_gold >= @max_carry_gold
   end
 
-  def player_mana_is_maxed(total_mana)
-    current_user.uncollected_mana+@mana_per_refresh+total_mana >= @max_carry_mana
+  def player_mana_is_maxed(earned_mana)
+    current_user.uncollected_mana+@mana_per_refresh+earned_mana >= @max_carry_mana
   end
 
   def turns_passed_since_last_update
@@ -68,8 +59,8 @@ module StatsHelper
   end
 
   def player_update(turns_passed)
-    total_gold = 0
-    total_mana = 0
+    earned_gold = 0
+    earned_mana = 0
     favor = current_user.favor
     turns = turns_passed
     favor_change = 0
@@ -85,24 +76,25 @@ module StatsHelper
         favor_change = favor_change + 1
       end
 #-----#calculate gold income-----------------
-      if player_gold_is_maxed(total_gold)
-        total_gold = @max_carry_gold
+      if player_gold_is_maxed(earned_gold)
+        earned_gold = @max_carry_gold
       else
-        total_gold = total_gold + @gold_per_refresh
+        earned_gold = earned_gold + @gold_per_refresh
       end
 #-----#calculated mana income----------------
-      if player_mana_is_maxed(total_mana)
-        total_mana = @mana_per_refresh
+      if player_mana_is_maxed(earned_mana)
+        earned_mana = @max_carry_mana
       else
-        total_mana = @max_carry_mana
+        earned_mana = earned_mana + @mana_per_refresh
       end
+
       turns = turns-1
       if turns == 0
-        current_user.update_attributes( uncollected_gold: total_gold,
-                                        uncollected_mana: total_mana,
+        current_user.update_attributes( uncollected_gold: earned_gold,
+                                        uncollected_mana: earned_mana,
                                         favor:favor,
                                         last_update_at: Time.now.beginning_of_hour)
-        current_user.user_notifications.create(notification_id:12, num1: turns_passed, num2:total_gold , num3:total_mana)
+        current_user.user_notifications.create(notification_id:12, num1: turns_passed, num2:earned_gold , num3:earned_mana)
         current_user.user_notifications.create(notification_id: 9, str1: updown, num1: favor_change.abs, num2: turns_passed)
       end
     end
