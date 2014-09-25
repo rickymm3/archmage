@@ -168,4 +168,8 @@ class ActivitiesController < ApplicationController
     redirect_to morale_index_path
   end
 
+  def cast
+    redirect_to spells_path, notice: "You casted #{params[:spell_id]}"
+  end
+
 end

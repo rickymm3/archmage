@@ -31,6 +31,7 @@ BaseApp::Application.routes.draw do
       post 'recruit', action: :recruit
       post 'party', action: :party
       post 'payoff', action: :payoff
+      post 'cast', action: :cast
     end
   end
   get "/admin" => "admin/base#index", :as => "admin"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140924235406) do
+ActiveRecord::Schema.define(version: 20140925212517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(version: 20140924235406) do
     t.integer  "spd"
     t.integer  "int"
     t.integer  "population"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "buff_effects", force: true do |t|
+    t.integer  "value"
+    t.boolean  "is_percent",    default: false
+    t.string   "stat_effected"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -55,6 +63,13 @@ ActiveRecord::Schema.define(version: 20140924235406) do
     t.integer "user_id"
   end
 
+  create_table "spell_buffs", force: true do |t|
+    t.integer  "spell_id"
+    t.integer  "buff_effect_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "spells", force: true do |t|
     t.string   "name"
     t.integer  "element_id"
@@ -62,6 +77,8 @@ ActiveRecord::Schema.define(version: 20140924235406) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "target"
+    t.integer  "mana_cost"
+    t.integer  "mana_upkeep"
   end
 
   create_table "structures", force: true do |t|

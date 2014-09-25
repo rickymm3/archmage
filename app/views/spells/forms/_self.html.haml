@@ -1,2 +1,10 @@
 .confirmation
   ="Are you sure you want to cast #{spell.name.capitalize}?"
+  %div Target is: Self
+  %div="Cost is: #{spell.mana_cost}"
+  %div="Upkeep is: #{spell.mana_upkeep}"
+
+  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} No
+  = form_tag("/activities/cast", method: "post") do
+    = hidden_field_tag "spell_id", spell.id
+    = submit_tag("Yes", class:"btn btn-default")

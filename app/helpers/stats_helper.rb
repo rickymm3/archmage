@@ -8,6 +8,8 @@ module StatsHelper
         render 'spells/forms/self', spell:spell
       when 'enemy'
         render 'spells/forms/enemy', spell:spell
+      when 'friend'
+        render 'spells/forms/friend', spell:spell
     end
   end
 
