@@ -8,7 +8,13 @@
     -content += "<div>Gold Upkeep: #{spell.gold_upkeep}/hr</div>" if spell.gold_upkeep > 0
     =link_to image_tag("/assets/buffs/#{spell.image_loc}"), "#", class:"buff-info",title: "#{spell.name}", tabindex: 0,
       data: { toggle: "popover", trigger:"focus hover", content: content.html_safe }
-  :javascript
-    $(document).ready(function(e){
-      $(".buff-info").popover({placement : 'top', html: true }).on('click', function(e) {e.preventDefault(); return true;});
-    });
+.buff-stats
+  ="+Gold = #{@static_buff_gold} | "
+  ="+Mana = #{@static_buff_mana} | "
+  ="%Gold = #{@percent_buff_gold} | "
+  ="%Mana = #{@percent_buff_mana} | "
+  ="Favor = #{@static_favor_buff}"
+:javascript
+  $(document).ready(function(e){
+    $(".buff-info").popover({placement : 'top', html: true }).on('click', function(e) {e.preventDefault(); return true;});
+  });

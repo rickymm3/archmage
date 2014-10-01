@@ -121,6 +121,11 @@ module StatsHelper
 
   def set_page_variables
     disable_buffs
+    @static_favor_buff = get_static_buffs('favor') || 0
+    @static_buff_gold = get_static_buffs('gold') || 0
+    @static_buff_mana = get_static_buffs('mana') || 0
+    @percent_buff_gold = get_percent_buffs('gold') || 0
+    @percent_buff_mana = get_percent_buffs('mana') || 0
     #i made this to dramatically limit the amount of queries used to get these
     @num_town_centers = current_user.user_structures.where(structure_id:1).first.num
     @num_alters = current_user.user_structures.where(structure_id:2).first.num
@@ -215,6 +220,18 @@ module StatsHelper
 
   def user_can_recruit?(totalcost)
     current_user.gold > totalcost
+  end
+
+  def get_static_buffs(stat_effected)
+    current_user.user_spells.flat_map do |us|
+      us.spell.buff_effects.where(stat_effected:stat_effected, is_percent:false).map(&:value)
+    end.reduce(&:+)
+  end
+
+  def get_percent_buffs(stat_effected)
+    current_user.user_spells.flat_map do |us|
+      us.spell.buff_effects.where(stat_effected:stat_effected, is_percent:true).map(&:value)
+    end.reduce(&:+)
   end
 
 end
