@@ -133,15 +133,18 @@ class ActivitiesController < ApplicationController
     num = 0
     ua = current_user.user_armies.find_or_initialize_by(army_id:params['unit_id'])
     num = ua.number_owned unless ua.number_owned.nil?
-    num_to_recruit = params[:num_to_recruit]
-    new = num + num_to_recruit.to_i
-    if ua.update_attributes(number_owned:new)
-      #need message
-      redirect_to recruit_index_path, notice: "you recruited #{num_to_recruit} units"
-    else
-      redirect_to recruit_index_path, notice: "there was an error, try again"
-    end
+    num_to_recruit = params[:num_to_recruit].to_i
+    new = num + num_to_recruit
+    totalcost = ua.army.cost * num_to_recruit
 
+    if user_can_recruit?(totalcost)
+      current_user.update_attributes(gold:current_user.gold-totalcost)
+      ua.update_attributes(number_owned:new)
+      #TODO add a notification message here
+      redirect_to recruit_index_path, notice: "you recruited #{num_to_recruit} units for #{totalcost} gold!"
+    else
+      redirect_to recruit_index_path, notice: "you don't have enough gold! You need #{totalcost - current_user.gold} more"
+    end
   end
 
   def payoff
@@ -179,7 +182,7 @@ class ActivitiesController < ApplicationController
           str2: Time.now,
           str3: Time.now + spell.length.hours
       )
-      current_user.update_attributes(mana:current_user.mana - spell.mana_cost)
+      current_user.update_attributes(mana:current_user.mana - spell.mana_cost, gold:current_user.gold - spell.gold_cost)
       redirect_to spells_path
     else
       redirect_to spells_path, notice: "You lack the required Mana. You need #{spell.mana_cost - current_user.mana} more mana"

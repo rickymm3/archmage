@@ -194,7 +194,7 @@ module StatsHelper
     5
   end
 
-  def can_user_recruit(unit)
+  def user_should_show_recruit(unit)
     unit.barracks_lvl
     true if unit.barracks_lvl <= @num_barracks # && unit.spell_lvl <= user_spell_level
   end
@@ -210,7 +210,11 @@ module StatsHelper
   end
 
   def user_can_cast?(spell)
-    current_user.mana > spell.mana_cost
+    current_user.mana > spell.mana_cost && current_user.gold > spell.gold_cost
+  end
+
+  def user_can_recruit?(totalcost)
+    current_user.gold > totalcost
   end
 
 end

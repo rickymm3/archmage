@@ -3,7 +3,19 @@
   %div Target is: Self
   %div="Cost is: #{spell.mana_cost}"
   %div="Upkeep is: #{spell.mana_upkeep}"
+  %br
+  %dt
+    Effects
+  -spell.buff_effects.each do |be|
+    %dd.span2
+      -perc = ""
+      -perc = "%" if be.is_percent?
+      -if be.value > 0
+        ="Increases #{be.stat_effected} by #{be.value}#{perc}"
+      -else
+        ="Decreases #{be.stat_effected} by #{be.value}#{perc}"
 
+  %br
   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} No
   = form_tag("/activities/cast", method: "post") do
     = hidden_field_tag "spell_id", spell.id
