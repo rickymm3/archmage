@@ -1,2 +1,4 @@
-tmp
-.idea/workspace.xml
+/tmp
+/.idea
+/log
+/log/*.log
