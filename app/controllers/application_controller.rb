@@ -11,9 +11,8 @@ class ApplicationController < ActionController::Base
 
   def every_page
     if current_user
-      get_page_variables
-      turns_passed = turns_passed_since_last_update
-      player_update(turns_passed)
+      set_page_variables
+      player_update(turns_passed_since_last_update)
       complete_explore if current_user.explore_end - Time.now < 0 && current_user.is_exploring?
     end
   end

@@ -9,7 +9,7 @@
         %dl.dl-horizontal
           %dt
             = link_to "Cast #{spell.name}", cast_spell_path(spell),
-              :remote => true, data: {toggle: "modal", target:"#spell-modal"}, class: "btn btn-default"
+              :remote => true, data: {toggle: "modal", target:"#spell-modal"}, class: "btn btn-default load-spell"
           %dd
             =spell.description
           %br

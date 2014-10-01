@@ -112,7 +112,15 @@ module StatsHelper
     roundup(s.mana_cost*us.num*((s.mana_multiple)**us.num))
   end
 
-  def get_page_variables
+  def disable_buffs
+    user_spells = current_user.user_spells
+    user_spells.each do |spell|
+      spell.update_attributes(active: false) if spell.ends < Time.now
+    end
+  end
+
+  def set_page_variables
+    disable_buffs
     #i made this to dramatically limit the amount of queries used to get these
     @num_town_centers = current_user.user_structures.where(structure_id:1).first.num
     @num_alters = current_user.user_structures.where(structure_id:2).first.num
@@ -195,6 +203,14 @@ module StatsHelper
     user.armies.joins(:user_armies).each do |a|
       a
     end
+  end
+
+  def get_user_buffs
+    current_user.user_spells
+  end
+
+  def user_can_cast?(spell)
+    current_user.mana > spell.mana_cost
   end
 
 end

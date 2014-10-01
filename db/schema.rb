@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925212517) do
+ActiveRecord::Schema.define(version: 20140930193151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 20140925212517) do
     t.string   "target"
     t.integer  "mana_cost"
     t.integer  "mana_upkeep"
+    t.integer  "length",      default: 1
+    t.string   "image_loc",   default: "generic-buff.png"
   end
 
   create_table "structures", force: true do |t|
@@ -126,6 +128,7 @@ ActiveRecord::Schema.define(version: 20140925212517) do
     t.datetime "ends"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",     default: false
   end
 
   create_table "user_structures", force: true do |t|

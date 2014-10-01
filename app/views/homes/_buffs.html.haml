@@ -1,0 +1,13 @@
+%span Buffs:
+-get_user_buffs.each do |buff|
+  -if buff.active
+    -spell = buff.spell
+    -content = "<div>#{spell.description}</div>" |
+    -content += "<div>Time Left: #{distance_of_time_in_words(buff.ends-Time.now)}</div>"
+    -content += "<div>Mana Upkeep: #{spell.mana_upkeep}</div>"
+    =link_to image_tag("/assets/buffs/#{spell.image_loc}"), "#", class:"buff-info",title: "#{spell.name}", tabindex: 0,
+      data: { toggle: "popover", trigger:"focus hover", content: content.html_safe }
+  :javascript
+    $(document).ready(function(e){
+      $(".buff-info").popover({placement : 'top', html: true }).on('click', function(e) {e.preventDefault(); return true;});
+    });

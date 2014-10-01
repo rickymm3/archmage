@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   before_destroy :destroy_structure_assignments
   has_many :user_structures, dependent: :delete_all
   has_many :structures, :through => :user_structures
+
   has_many :user_notifications, dependent: :delete_all
   has_many :notifications, :through => :user_notifications
 

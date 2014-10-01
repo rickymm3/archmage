@@ -2,7 +2,7 @@
 -mana_perc = ((current_user.uncollected_mana.to_f/@max_carry_mana) * 100).ceil
 
 .panel.panel-default
-  .panel-heading= "Status (#{time_till_next_update})(last update: #{current_user.last_update_at.to_time}/#{Time.now.to_time}"
+  .panel-heading= "Status: (Updates on the hour) #{time_till_next_update} untill next update"
   %table.table
     %tbody
       %tr
@@ -33,7 +33,7 @@
             = submit_tag("Collect Prayer", class:'btn btn-default btn-xs')
       %tr
         %td{colspan:5}
-          ="Your troops demand retribution for their service.  They get angry when you collect tribute and prayer without giving back."
+          ="Payment for your troops are deducted with each update.  If you can't pay them, their morale will lower.  With lower morale, you have an increased chance for units abandoning you."
       %tr
         %td.text-right{style:"width:15%"}
           %span=link_to "<i class='fa fa-info-circle'></i>".html_safe, "#", class:"favor-info",title: "Favor Help", tabindex: 0,

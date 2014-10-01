@@ -29,5 +29,7 @@ module CreateUserHelper
     user.touch(:last_collect_gold_at)
     user.touch(:last_collect_mana_at)
     user.save
+    spell = Spell.find(8)
+    user.user_spells.create(spell_id:8, began: Time.now, ends: Time.now + spell.length.hours, active:true)
   end
 end

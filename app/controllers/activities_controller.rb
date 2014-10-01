@@ -126,7 +126,7 @@ class ActivitiesController < ApplicationController
   end
 
   def recruit
-    #!***!need a check in here that doesn't allow you to pass the population cap!
+    #TODO need a check in here that doesn't allow you to pass the population cap!
     if params[:num_to_recruit].empty?
       redirect_to recruit_index_path, notice: "Can't be 0"
     end
@@ -167,9 +167,23 @@ class ActivitiesController < ApplicationController
     )
     redirect_to morale_index_path
   end
-
+  #<UserSpell id: nil, spell_id: nil, user_id: 1, began: nil, ends: nil, created_at: nil, updated_at: nil>
   def cast
-    redirect_to spells_path, notice: "You casted #{params[:spell_id]}"
+    spell = Spell.find(params[:spell_id])
+    if user_can_cast?(spell)
+      current = current_user.user_spells.where(spell_id: spell.id).first_or_initialize
+      current.update_attributes(began: Time.now, ends: Time.now + spell.length.hours, active:true)
+      current_user.user_notifications.create(
+          notification_id:13,
+          str1: spell.name,
+          str2: Time.now,
+          str3: Time.now + spell.length.hours
+      )
+      current_user.update_attributes(mana:current_user.mana - spell.mana_cost)
+      redirect_to spells_path
+    else
+      redirect_to spells_path, notice: "You lack the required Mana. You need #{spell.mana_cost - current_user.mana} more mana"
+    end
   end
 
 end
