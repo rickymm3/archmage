@@ -6,7 +6,7 @@
     -content += "<div>Time Left: #{distance_of_time_in_words(buff.ends-Time.now)}</div>"
     -content += "<div>Mana Upkeep: #{spell.mana_upkeep}/hr</div>" if spell.mana_upkeep > 0
     -content += "<div>Gold Upkeep: #{spell.gold_upkeep}/hr</div>" if spell.gold_upkeep > 0
-    =link_to image_tag("/assets/buffs/#{spell.image_loc}"), "#", class:"buff-info",title: "#{spell.name}", tabindex: 0,
+    =link_to image_tag("buffs/#{spell.image_loc}"), "#", class:"buff-info",title: "#{spell.name}", tabindex: 0,
       data: { toggle: "popover", trigger:"focus hover", content: content.html_safe }
 .buff-stats
   ="+Gold = #{@static_buff_gold} | "
