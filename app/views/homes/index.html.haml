@@ -1,3 +1,18 @@
+-unless current_user
+  .update
+    %h3 Updates!(10-1-14)
+    %h5 Added a slew of things including
+  %ul
+    %li
+      Usernames (requires you to sign back up)
+    %li
+      Elements - Mainly in backend now, but currently integrated with spell types
+    %li
+      Spells! - You can now cast certain buffs
+    %li
+      Some other stuff...
+    %li
+      Its almost a game!  War Coming soon.
 -if current_user
   =render "shared/home_pic", page: @page
   =render "buffs"
