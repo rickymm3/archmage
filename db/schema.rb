@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001205715) do
+ActiveRecord::Schema.define(version: 20141002024006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,8 +143,8 @@ ActiveRecord::Schema.define(version: 20141001205715) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",                    null: false
-    t.string   "encrypted_password",     default: "",                    null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 20141001205715) do
     t.integer  "uncollected_gold"
     t.integer  "uncollected_mana"
     t.integer  "favor"
-    t.datetime "last_update_at",         default: '2014-09-22 14:19:11'
+    t.datetime "last_update_at"
     t.integer  "element_id"
   end
 

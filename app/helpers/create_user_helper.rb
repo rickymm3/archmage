@@ -15,6 +15,7 @@ module CreateUserHelper
   end
 
   def add_user_stats(user)
+    user.last_update_at = Time.now.beginning_of_hour
     user.favor = 50
     user.gold = 300
     user.mana = 300
@@ -29,7 +30,7 @@ module CreateUserHelper
     user.touch(:last_collect_gold_at)
     user.touch(:last_collect_mana_at)
     user.save
-    spell = Spell.find(8)
-    user.user_spells.create(spell_id:8, began: Time.now, ends: Time.now + spell.length.hours, active:true)
+    spell = Spell.find_by_name('New Player')
+    user.user_spells.create(spell_id:spell.id, began: Time.now, ends: Time.now + spell.length.hours, active:true)
   end
 end
