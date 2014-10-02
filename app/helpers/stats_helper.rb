@@ -121,11 +121,11 @@ module StatsHelper
 
   def set_page_variables
     disable_buffs
-    @static_favor_buff = get_static_buffs('favor') || 0
-    @static_buff_gold = get_static_buffs('gold') || 0
-    @static_buff_mana = get_static_buffs('mana') || 0
-    @percent_buff_gold = get_percent_buffs('gold') || 0
-    @percent_buff_mana = get_percent_buffs('mana') || 0
+    @static_favor_buff = get_buffs('favor', false).to_f || 0
+    @static_buff_gold = get_buffs('gold', false).to_f || 0
+    @static_buff_mana = get_buffs('mana', false).to_f || 0
+    @percent_buff_gold = get_buffs('gold', true).to_f || 0
+    @percent_buff_mana = get_buffs('mana', true).to_f || 0
     #i made this to dramatically limit the amount of queries used to get these
     @num_town_centers = current_user.user_structures.where(structure_id:1).first.num
     @num_alters = current_user.user_structures.where(structure_id:2).first.num
@@ -181,8 +181,10 @@ module StatsHelper
 
   def get_structure_gold_per_hour(num_town_centers, num_banks)
     num = (num_town_centers * 100) + (num_banks * 500) - get_unit_user_gold_cost
+    num + @static_buff_gold
+    num = num.to_f * (1+(@percent_buff_gold.to_f/100))
     num = 0 if num < 0
-    num
+    num.to_i
   end
 
   def get_structure_mana_per_hour(num_alters, num_town_centers, num_mana_core)
@@ -222,15 +224,9 @@ module StatsHelper
     current_user.gold > totalcost
   end
 
-  def get_static_buffs(stat_effected)
+  def get_buffs(stat_effected, percent)
     current_user.user_spells.flat_map do |us|
-      us.spell.buff_effects.where(stat_effected:stat_effected, is_percent:false).map(&:value)
-    end.reduce(&:+)
-  end
-
-  def get_percent_buffs(stat_effected)
-    current_user.user_spells.flat_map do |us|
-      us.spell.buff_effects.where(stat_effected:stat_effected, is_percent:true).map(&:value)
+      us.spell.buff_effects.where(stat_effected:stat_effected, is_percent:percent).map(&:value)
     end.reduce(&:+)
   end
 
