@@ -2,7 +2,7 @@
   .panel-heading Raise Morale
   .panel-body
     .well
-      -spell = Spell.find_by_name('party')
+      -spell = Spell.find_by_name('Party')
       = form_tag("/activities/cast", method: "post") do
         = hidden_field_tag "spell_id", spell.id
         = submit_tag("Throw a Party", class:"btn btn-default")
