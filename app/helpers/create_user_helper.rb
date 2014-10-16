@@ -30,7 +30,11 @@ module CreateUserHelper
     user.touch(:last_collect_gold_at)
     user.touch(:last_collect_mana_at)
     user.save
-    spell = Spell.find_by_name('New Player')
-    user.user_spells.create(spell_id:spell.id, began: Time.now, ends: Time.now + spell.length.hours, active:true)
+    new_player = Spell.find_by_name('New Player')
+    serenity = Spell.find_by_name('Serenity')
+    deforestation = Spell.find_by_name('Desforestation')
+    user.user_spells.create(spell_id:new_player.id, began: Time.now, ends: Time.now + new_player.length.hours, active:true)
+    user.user_spells.create(spell_id:serenity.id, owned: true)
+    user.user_spells.create(spell_id:deforestation.id, owned: true)
   end
 end
