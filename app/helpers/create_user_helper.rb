@@ -32,7 +32,7 @@ module CreateUserHelper
     user.save
     new_player = Spell.find_by_name('New Player')
     serenity = Spell.find_by_name('Serenity')
-    deforestation = Spell.find_by_name('Desforestation')
+    deforestation = Spell.find_by_name('Deforestation')
     user.user_spells.create(spell_id:new_player.id, began: Time.now, ends: Time.now + new_player.length.hours, active:true)
     user.user_spells.create(spell_id:serenity.id, owned: true)
     user.user_spells.create(spell_id:deforestation.id, owned: true)
