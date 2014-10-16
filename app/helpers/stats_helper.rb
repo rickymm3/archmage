@@ -39,7 +39,7 @@ module StatsHelper
   end
 
   def calculate_favor(change, favor = current_user.favor)
-    favor = favor + change
+    favor = favor + change + @static_favor_buff
     if favor > 100
       favor = 100
     elsif favor < 0
@@ -71,11 +71,11 @@ module StatsHelper
       if @gold_per_refresh <= 0
         updown = 'lost'
         favor = calculate_favor(-5, favor)
-        favor_change = favor_change - 5
+        favor_change = favor_change - 5 + @static_favor_buff
       else
         updown = 'gained'
         favor = calculate_favor(1, favor) if @gold_per_refresh >= 0
-        favor_change = favor_change + 1
+        favor_change = favor_change + 1 + @static_favor_buff
       end
 #-----#calculate gold income-----------------
       if player_gold_is_maxed(earned_gold)
@@ -213,7 +213,7 @@ module StatsHelper
   end
 
   def get_user_buffs
-    current_user.user_spells
+    current_user.user_spells.where(active:true)
   end
 
   def user_can_cast?(spell)
@@ -225,7 +225,7 @@ module StatsHelper
   end
 
   def get_buffs(stat_effected, percent)
-    current_user.user_spells.flat_map do |us|
+    current_user.user_spells.where(active:true).flat_map do |us|
       us.spell.buff_effects.where(stat_effected:stat_effected, is_percent:percent).map(&:value)
     end.reduce(&:+)
   end

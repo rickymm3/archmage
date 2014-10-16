@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141002024006) do
+ActiveRecord::Schema.define(version: 20141010192649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(version: 20141002024006) do
     t.integer  "value"
     t.boolean  "is_percent",    default: false
     t.string   "stat_effected"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "create_learned_user_spells", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "spell_id"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -132,6 +140,7 @@ ActiveRecord::Schema.define(version: 20141002024006) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",     default: false
+    t.boolean  "owned"
   end
 
   create_table "user_structures", force: true do |t|

@@ -2,7 +2,7 @@
 <html lang="en">
 
   <head>
-    <title>Base Application</title>
+    <title>Archmage! 2.0</title>
 
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
@@ -24,11 +24,12 @@
 
       <%= render "layouts/application/flash_messages" %>
       <%= render "shared/notifications" if current_user%>
-
       <%= yield %>
 
     </div>
 
   </body>
+
+      <%= render "layouts/application/footer" %>"
 
 </html>
