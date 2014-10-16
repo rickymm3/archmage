@@ -115,7 +115,9 @@ module StatsHelper
   def disable_buffs
     user_spells = current_user.user_spells
     user_spells.each do |spell|
-      spell.update_attributes(active: false) if spell.ends < Time.now
+      if spell.active
+        spell.update_attributes(active: false) if spell.ends < Time.now
+      end
     end
   end
 
